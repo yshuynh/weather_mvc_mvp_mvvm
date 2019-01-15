@@ -1,10 +1,10 @@
-package com.example.huynh.weather_mvc.controller;
+package com.example.huynh.weather_mvc.view;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.huynh.weather_mvc.model.WeatherCurrentPOJO.WeatherCurrentPOJO;
+import com.example.huynh.weather_mvc.view.WeatherPage;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class CustomViewPagerAdapter extends FragmentStatePagerAdapter {
     ArrayList<String> list;
     ArrayList<Fragment> fragments;
 
-    CustomViewPagerAdapter(FragmentManager fragmentManager, ArrayList<String> list) {
+    public CustomViewPagerAdapter(FragmentManager fragmentManager, ArrayList<String> list) {
         super(fragmentManager);
         this.list = list;
         fragments = new ArrayList<Fragment>();

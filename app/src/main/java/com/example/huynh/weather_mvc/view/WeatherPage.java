@@ -1,5 +1,5 @@
 //MVP
-package com.example.huynh.weather_mvc.controller;
+package com.example.huynh.weather_mvc.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;

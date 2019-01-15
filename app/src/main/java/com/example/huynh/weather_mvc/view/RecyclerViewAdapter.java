@@ -1,4 +1,4 @@
-package com.example.huynh.weather_mvc.controller;
+package com.example.huynh.weather_mvc.view;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

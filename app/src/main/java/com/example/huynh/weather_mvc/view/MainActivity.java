@@ -1,4 +1,4 @@
-package com.example.huynh.weather_mvc.controller;
+package com.example.huynh.weather_mvc.view;
 
 import android.content.Intent;
 import android.os.Build;
@@ -10,21 +10,24 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.huynh.weather_mvc.R;
 import com.example.huynh.weather_mvc.model.MyCityList;
+import com.example.huynh.weather_mvc.presenter.MainPresenter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainView {
 
     String TAG = "MainActivity";
     ViewPager viewPager;
+
+    MainPresenter mainPresenter = new MainPresenter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mainPresenter.onCreate();
 
         //Remove Status Bar + Navigation
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -49,7 +52,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG, "onResume: ");
+        mainPresenter.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mainPresenter.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mainPresenter.onDestroy();
+    }
+
+    @Override
+    public void onUpdateViewPager() {
         CustomViewPagerAdapter customViewPagerAdapter = new CustomViewPagerAdapter(
                 getSupportFragmentManager(),
                 MyCityList.getInstance().getMyCityList());
