@@ -1,3 +1,4 @@
+//MVC
 package com.example.huynh.weather_mvc.controller;
 
 import android.content.Intent;
@@ -18,6 +19,7 @@ import com.example.huynh.weather_mvc.model.MyCityList;
 
 public class MainActivity extends AppCompatActivity {
 
+    //MVC
     String TAG = "MainActivity";
     ViewPager viewPager;
 
