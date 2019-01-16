@@ -1,4 +1,4 @@
-package com.example.huynh.weather_mvc.view;
+package com.example.huynh.weather_mvc.view.CustomActivity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,13 +6,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.huynh.weather_mvc.R;
-import com.example.huynh.weather_mvc.model.MyCityList;
 import com.example.huynh.weather_mvc.presenter.CustomPresenter;
-import com.example.huynh.weather_mvc.view.RecyclerViewAdapter;
+import com.example.huynh.weather_mvc.presenter.HolderPresenter;
 
 import java.util.ArrayList;
 
-public class CustomActivity extends AppCompatActivity implements CustomView {
+public class CustomActivity extends AppCompatActivity implements CustomActivityView {
 
     CustomPresenter customPresenter = new CustomPresenter(this);
     RecyclerView recyclerView;
@@ -49,7 +48,7 @@ public class CustomActivity extends AppCompatActivity implements CustomView {
 
     @Override
     public void onUpdateRecyclerView(ArrayList<String> listCity) {
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, MyCityList.getInstance().getMyAllCityList());
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, new HolderPresenter());
         recyclerView.setAdapter(adapter);
     }
 }

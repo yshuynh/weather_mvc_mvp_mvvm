@@ -1,5 +1,5 @@
 //MVP
-package com.example.huynh.weather_mvc.view;
+package com.example.huynh.weather_mvc.view.MainActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -21,6 +21,7 @@ import com.example.huynh.weather_mvc.model.Service;
 import com.example.huynh.weather_mvc.model.ServiceListener;
 import com.example.huynh.weather_mvc.model.Weather5daysPOJO.Weather5daysPOJO;
 import com.example.huynh.weather_mvc.model.WeatherCurrentPOJO.WeatherCurrentPOJO;
+import com.example.huynh.weather_mvc.presenter.PagerPresenter;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,13 +33,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 @SuppressLint("ValidFragment")
-public class WeatherPage extends Fragment implements ServiceListener {
+public class WeatherPage extends Fragment implements PagerView{
 
     String TAG = "WeatherPage";
 
     String cityName;
     WeatherCurrentPOJO detail = null;
     Weather5daysPOJO detail5day = null;
+    PagerPresenter pagerPresenter;
 
     @SuppressLint("ValidFragment")
     public WeatherPage(String cityName) {
@@ -56,15 +58,16 @@ public class WeatherPage extends Fragment implements ServiceListener {
         super.onViewCreated(view, savedInstanceState);
         // Custom View Here
 
+        pagerPresenter = new PagerPresenter(this);
+
         if (detail != null) {
             UpdateLayout(detail, view);
             UpdateLayout5day(detail5day, view);
             return;
         }
 
-        Service service = new Service(this);
-        service.CallAPICurrentWeather(cityName);
-        service.CallAPI5dayWeather(cityName);
+        pagerPresenter.onCreate();
+        pagerPresenter.getData(cityName);
     }
 
     String GetLetterWeather(String text) {
@@ -157,14 +160,12 @@ public class WeatherPage extends Fragment implements ServiceListener {
         textView.setText(detail.getWeather().get(0).getDescription());
 
     }
-
     @Override
     public void onResponseCallCurrentWeather(WeatherCurrentPOJO detail) {
         View view = getView();
         this.detail = detail;
         UpdateLayout(detail, view);
     }
-
     @Override
     public void onResponseCall5dayWeather(Weather5daysPOJO detail5day) {
         View view = getView();

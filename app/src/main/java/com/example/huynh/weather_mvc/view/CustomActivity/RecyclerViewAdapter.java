@@ -1,4 +1,4 @@
-package com.example.huynh.weather_mvc.view;
+package com.example.huynh.weather_mvc.view.CustomActivity;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,22 +10,24 @@ import android.widget.TextView;
 
 import com.example.huynh.weather_mvc.R;
 import com.example.huynh.weather_mvc.model.MyCityList;
+import com.example.huynh.weather_mvc.presenter.CustomPresenter;
+import com.example.huynh.weather_mvc.presenter.HolderPresenter;
 
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
-    private ArrayList<String> mList;
     private LayoutInflater mLayoutInflater;
     private Context mContext;
+    private HolderPresenter presenter;
 
-    public RecyclerViewAdapter(Context context, ArrayList<String> mList) {
-        this.mList = mList;
+    public RecyclerViewAdapter(Context context, HolderPresenter presenter) {
         this.mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
+        this.presenter = presenter;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements HolderView {
 
 //        public TextView title, year, genre;
         public TextView cityName;
@@ -43,8 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             checkBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (checkBox.isChecked()) MyCityList.getInstance().AddNewCity(cityName.getText().toString());
-                    else MyCityList.getInstance().RemoveCity(cityName.getText().toString());
+                    presenter.onCheckBoxClicked(cityName.getText().toString(), checkBox.isChecked());
                 }
             });
 
@@ -62,6 +63,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 }
             });
         }
+
+        @Override
+        public void setCityName(String name) {
+            this.cityName.setText(name);
+        }
+
+        @Override
+        public void setCheckBox(boolean check) {
+            this.checkBox.setChecked(check);
+        }
     }
 
 
@@ -73,18 +84,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(RecyclerViewAdapter.MyViewHolder holder, int position) {
-//        Movie movie = movieList.get(position);
-//        holder.title.setText(movie.getTitle());
-//        holder.genre.setText(movie.getGenre());
-//        holder.year.setText(movie.getYear());
-        String name = mList.get(position);
-        holder.cityName.setText(name);
-        holder.checkBox.setChecked(MyCityList.getInstance().CheckCityName(name));
+//        String name = mList.get(position);
+//        holder.cityName.setText(name);
+//        holder.checkBox.setChecked(MyCityList.getInstance().CheckCityName(name));
+        presenter.onBindViewHolderAtPosition(holder, position);
     }
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return presenter.getItemCount();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.huynh.weather_mvc.view;
+package com.example.huynh.weather_mvc.view.MainActivity;
 
 import android.content.Intent;
 import android.os.Build;
@@ -14,8 +14,11 @@ import android.view.WindowManager;
 import com.example.huynh.weather_mvc.R;
 import com.example.huynh.weather_mvc.model.MyCityList;
 import com.example.huynh.weather_mvc.presenter.MainPresenter;
+import com.example.huynh.weather_mvc.view.CustomActivity.CustomActivity;
 
-public class MainActivity extends AppCompatActivity implements MainView {
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements MainActivityView {
 
     String TAG = "MainActivity";
     ViewPager viewPager;
@@ -68,10 +71,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
-    public void onUpdateViewPager() {
+    public void onUpdateViewPager(ArrayList<String> cityList) {
         CustomViewPagerAdapter customViewPagerAdapter = new CustomViewPagerAdapter(
                 getSupportFragmentManager(),
-                MyCityList.getInstance().getMyCityList());
+                cityList);
         viewPager.setAdapter(customViewPagerAdapter);
     }
 }

@@ -1,13 +1,13 @@
 package com.example.huynh.weather_mvc.presenter;
 
 import com.example.huynh.weather_mvc.model.MyCityList;
-import com.example.huynh.weather_mvc.view.CustomView;
+import com.example.huynh.weather_mvc.view.CustomActivity.CustomActivityView;
 
 public class CustomPresenter implements Presenter {
 
-    CustomView customView;
+    CustomActivityView customView;
 
-    public CustomPresenter(CustomView customView) {
+    public CustomPresenter(CustomActivityView customView) {
         this.customView = customView;
     }
 
@@ -30,4 +30,5 @@ public class CustomPresenter implements Presenter {
     public void onDestroy() {
 
     }
+
 }

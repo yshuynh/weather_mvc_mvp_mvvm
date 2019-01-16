@@ -1,12 +1,13 @@
 package com.example.huynh.weather_mvc.presenter;
 
-import com.example.huynh.weather_mvc.view.MainView;
+import com.example.huynh.weather_mvc.model.MyCityList;
+import com.example.huynh.weather_mvc.view.MainActivity.MainActivityView;
 
 public class MainPresenter implements Presenter {
 
-    MainView mainView;
+    MainActivityView mainView;
 
-    public MainPresenter(MainView mainView) {
+    public MainPresenter(MainActivityView mainView) {
         this.mainView = mainView;
     }
 
@@ -21,7 +22,7 @@ public class MainPresenter implements Presenter {
 
     @Override
     public void onResume() {
-        mainView.onUpdateViewPager();
+        mainView.onUpdateViewPager(MyCityList.getInstance().getMyCityList());
     }
 
     @Override
