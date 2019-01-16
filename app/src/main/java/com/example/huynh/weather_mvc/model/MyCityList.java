@@ -36,6 +36,14 @@ public class MyCityList {
         myAllCityList.add("Danang");
         myAllCityList.add("Hanoi");
         myAllCityList.add("Thanh pho ho chi minh");
+        myAllCityList.add("Vung Tau");
+        myAllCityList.add("Dubai");
+        myAllCityList.add("Nha Trang");
+        myAllCityList.add("Phan Thiet");
+        myAllCityList.add("Los Angeles");
+        myAllCityList.add("Hamilton");
+        myAllCityList.add("Holman");
+        myAllCityList.add("Cali");
     }
 
     public ArrayList<String> getMyCityList() {

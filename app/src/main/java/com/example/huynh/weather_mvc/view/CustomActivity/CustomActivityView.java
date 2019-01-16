@@ -4,5 +4,5 @@ import java.util.ArrayList;
 
 public interface CustomActivityView {
 
-    void onUpdateRecyclerView(ArrayList<String> listCity);
+    void onUpdateRecyclerView();
 }

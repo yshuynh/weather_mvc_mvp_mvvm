@@ -47,7 +47,7 @@ public class CustomActivity extends AppCompatActivity implements CustomActivityV
     }
 
     @Override
-    public void onUpdateRecyclerView(ArrayList<String> listCity) {
+    public void onUpdateRecyclerView() {
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, new HolderPresenter());
         recyclerView.setAdapter(adapter);
     }

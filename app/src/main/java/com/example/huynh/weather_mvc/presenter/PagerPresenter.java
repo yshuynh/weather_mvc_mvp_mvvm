@@ -1,16 +1,10 @@
 package com.example.huynh.weather_mvc.presenter;
 
-import android.support.v4.app.Fragment;
-
-import com.example.huynh.weather_mvc.model.MyCityList;
 import com.example.huynh.weather_mvc.model.Service;
 import com.example.huynh.weather_mvc.model.ServiceListener;
 import com.example.huynh.weather_mvc.model.Weather5daysPOJO.Weather5daysPOJO;
 import com.example.huynh.weather_mvc.model.WeatherCurrentPOJO.WeatherCurrentPOJO;
 import com.example.huynh.weather_mvc.view.MainActivity.PagerView;
-import com.example.huynh.weather_mvc.view.MainActivity.WeatherPage;
-
-import java.util.ArrayList;
 
 public class PagerPresenter implements Presenter {
 

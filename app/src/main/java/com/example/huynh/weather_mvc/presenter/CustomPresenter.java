@@ -13,7 +13,7 @@ public class CustomPresenter implements Presenter {
 
     @Override
     public void onCreate() {
-        customView.onUpdateRecyclerView(MyCityList.getInstance().getMyAllCityList());
+        customView.onUpdateRecyclerView();
     }
 
     @Override

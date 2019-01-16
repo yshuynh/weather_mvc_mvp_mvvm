@@ -2,7 +2,6 @@
 package com.example.huynh.weather_mvc.view.MainActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,10 +14,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.huynh.weather_mvc.R;
-import com.example.huynh.weather_mvc.model.Retrofit2.APIUtils;
-import com.example.huynh.weather_mvc.model.Retrofit2.DataClient;
-import com.example.huynh.weather_mvc.model.Service;
-import com.example.huynh.weather_mvc.model.ServiceListener;
 import com.example.huynh.weather_mvc.model.Weather5daysPOJO.Weather5daysPOJO;
 import com.example.huynh.weather_mvc.model.WeatherCurrentPOJO.WeatherCurrentPOJO;
 import com.example.huynh.weather_mvc.presenter.PagerPresenter;
@@ -27,10 +22,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 @SuppressLint("ValidFragment")
 public class WeatherPage extends Fragment implements PagerView{
