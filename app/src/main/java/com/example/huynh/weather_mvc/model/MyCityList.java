@@ -37,7 +37,6 @@ public class MyCityList {
         myAllCityList.add("Hanoi");
         myAllCityList.add("Thanh pho ho chi minh");
         myAllCityList.add("Vung Tau");
-        myAllCityList.add("Dubai");
         myAllCityList.add("Nha Trang");
         myAllCityList.add("Phan Thiet");
         myAllCityList.add("Los Angeles");
