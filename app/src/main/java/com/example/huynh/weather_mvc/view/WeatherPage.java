@@ -1,7 +1,8 @@
 //MVVM
-package com.example.huynh.weather_mvc.controller;
+package com.example.huynh.weather_mvc.view;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,6 +22,7 @@ import com.example.huynh.weather_mvc.model.Service;
 import com.example.huynh.weather_mvc.model.ServiceListener;
 import com.example.huynh.weather_mvc.model.Weather5daysPOJO.Weather5daysPOJO;
 import com.example.huynh.weather_mvc.model.WeatherCurrentPOJO.WeatherCurrentPOJO;
+import com.example.huynh.weather_mvc.viewmodel.PagerViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -40,9 +42,12 @@ public class WeatherPage extends Fragment implements ServiceListener {
     WeatherCurrentPOJO detail = null;
     Weather5daysPOJO detail5day = null;
 
+    PagerViewModel pagerViewModel;
+
     @SuppressLint("ValidFragment")
     public WeatherPage(String cityName) {
         this.cityName = cityName;
+        pagerViewModel = new PagerViewModel(cityName);
     }
 
     @Nullable
@@ -62,9 +67,21 @@ public class WeatherPage extends Fragment implements ServiceListener {
             return;
         }
 
-        Service service = new Service(this);
-        service.CallAPICurrentWeather(cityName);
-        service.CallAPI5dayWeather(cityName);
+        pagerViewModel.getDetail().observe(this, new Observer<WeatherCurrentPOJO>() {
+            @Override
+            public void onChanged(@Nullable WeatherCurrentPOJO weatherCurrentPOJO) {
+                Log.d(TAG, "onChanged: " + weatherCurrentPOJO.getName());
+                UpdateLayout(weatherCurrentPOJO, view);
+            }
+        });
+        pagerViewModel.getDetail5day().observe(this, new Observer<Weather5daysPOJO>() {
+            @Override
+            public void onChanged(@Nullable Weather5daysPOJO weather5daysPOJO) {
+                UpdateLayout5day(weather5daysPOJO, view);
+            }
+        });
+
+        pagerViewModel.onCreate();
     }
 
     String GetLetterWeather(String text) {

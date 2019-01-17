@@ -1,7 +1,9 @@
-package com.example.huynh.weather_mvc.controller;
+package com.example.huynh.weather_mvc.view;
 
+import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,16 +12,18 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.huynh.weather_mvc.R;
 import com.example.huynh.weather_mvc.model.MyCityList;
+import com.example.huynh.weather_mvc.viewmodel.MainViewModel;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     String TAG = "MainActivity";
     ViewPager viewPager;
+    MainViewModel mainViewModel = new MainViewModel();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +48,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        addViewModelListener();
+        mainViewModel.onCreate();
+    }
+
+    private void addViewModelListener() {
+        mainViewModel.getList().observe(this, new Observer<ArrayList<String>>() {
+            @Override
+            public void onChanged(@Nullable ArrayList<String> list) {
+                CustomViewPagerAdapter customViewPagerAdapter = new CustomViewPagerAdapter(getSupportFragmentManager(), list);
+                viewPager.setAdapter(customViewPagerAdapter);
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         Log.d(TAG, "onResume: ");
-        CustomViewPagerAdapter customViewPagerAdapter = new CustomViewPagerAdapter(
-                getSupportFragmentManager(),
-                MyCityList.getInstance().getMyCityList());
-        viewPager.setAdapter(customViewPagerAdapter);
+        mainViewModel.onResume();
     }
 }
